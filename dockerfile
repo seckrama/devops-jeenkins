@@ -1,13 +1,23 @@
-# Build
-FROM node:18-alpine AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+# Utiliser l'image Node.js officielle
+FROM node:18-alpine
 
-# Serve
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Créer le répertoire de travail
+WORKDIR /app
+
+# Copier package.json et package-lock.json
+COPY package*.json ./
+
+# Installer les dépendances
+RUN npm install
+
+CMD ["npm", "start"]
+
+
+# Copier le reste du code
+COPY . .
+
+# Exposer le port 3000
+EXPOSE 3000
+
+# Démarrer l'application
+CMD ["npm", "start"]
