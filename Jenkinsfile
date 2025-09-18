@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/seckrama/devops-cours-workflow.git'
+                git branch: 'main', url: 'https://github.com/seckrama/devops-jeenkins.git'
             }
         }
 
